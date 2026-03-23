@@ -21,9 +21,9 @@ public class ScanPlatformView implements PlatformView, MethodChannel.MethodCallH
     private Activity activity;
     private ActivityPluginBinding activityPluginBinding;
     private ParentView parentView;
-//    private ScanView scanView;
+    //    private ScanView scanView;
     private ScanViewNew scanViewNew;
-//    private ScanDrawView scanDrawView;
+    //    private ScanDrawView scanDrawView;
     private boolean flashlight;
 
     ScanPlatformView(@NonNull BinaryMessenger messenger, @NonNull Context context, @NonNull Activity activity, ActivityPluginBinding activityPluginBinding, int viewId, @Nullable Map<String, Object> args) {
@@ -53,7 +53,13 @@ public class ScanPlatformView implements PlatformView, MethodChannel.MethodCallH
 
     @Override
     public void dispose() {
+        channel.setMethodCallHandler(null);
         this.scanViewNew.dispose();
+        this.scanViewNew = null;
+        this.parentView = null;
+        this.activityPluginBinding = null;
+        this.activity = null;
+        this.context = null;
     }
 
     @Override
